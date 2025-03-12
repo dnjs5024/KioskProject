@@ -2,6 +2,10 @@ package com.example.kiosk5;
 
 public class Main {
 
+    public static void main(String[] args) {
+        Main main = new Main();
+        main.kiosk.start();
+    }
 
     private Kiosk kiosk = null;
 
@@ -9,8 +13,5 @@ public class Main {
         kiosk = new Kiosk();
     }
 
-    public static void main(String[] args) {
-        Main main = new Main();
-        main.kiosk.start();
-    }
+
 }

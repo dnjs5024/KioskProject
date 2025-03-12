@@ -1,16 +1,16 @@
-package com.example.kiosk5;
+package com.example.kiosk6;
 
 import java.util.List;
 
 public class MenuItem {
 
     private String menuName;
-    private String price;
+    private Integer price;
     private String description;
     private String category;
 
     //생성자
-    public MenuItem(String menuName, String price, String description, String category) {
+    public MenuItem(String menuName, Integer price, String description, String category) {
         this.menuName = menuName;
         this.price = price;
         this.description = description;
@@ -43,11 +43,11 @@ public class MenuItem {
         this.description = description;
     }
 
-    public String getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
@@ -55,6 +55,10 @@ public class MenuItem {
         return null;
     }
 
-
-
+    @Override
+    public String toString() {
+        return   menuName +
+                "  | W " + (price / 1000) + "." + (price / 100 % 10) +
+                "  | " + description;
+    }
 }
