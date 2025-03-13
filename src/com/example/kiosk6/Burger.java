@@ -20,6 +20,7 @@ public class Burger extends MenuItem {
     public Burger(String menuName, Integer price, String description, String category) {
         super(menuName, price, description, category);
     }
+
     @Override
     public List<MenuItem> getSelectCategoryMenuList() {
         return new ArrayList<>(menuItemList);

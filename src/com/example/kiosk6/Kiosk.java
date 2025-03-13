@@ -48,15 +48,19 @@ public class Kiosk implements KioskFunction {
         }
 
     }
+
     //콘솔에 메인 메뉴 출력
     public void showMainMenu() {
         System.out.println("[Main Menu]");
-        int cnt = 1;
-        for(String title : menu.getCategoryName()){
-            System.out.println(cnt+". "+title);
-            cnt++;
-        }
+        IntStream.range(0, menu.getCategoryName().length).forEach(cnt -> System.out.println(cnt + 1 + ". " + menu.getCategoryName()[cnt]));
         System.out.println("0. 종료    | 종료\n");
+    }
+
+    //콘솔에 선택한 카테고리의 메뉴 출력
+    public void selectMenu(int selectNum) {
+        System.out.println("[" + menu.getCategoryName()[selectNum-1] + " Menu]");
+        IntStream.range(0, menu.getMenuItems().size()).forEach(cnt -> System.out.println(cnt + 1 + ". " + menu.getMenuItems().get(cnt).toString()));
+        System.out.println("0. 뒤로가기    | 뒤로가기");
     }
 
     /**
@@ -89,7 +93,9 @@ public class Kiosk implements KioskFunction {
                 if (selectNum == 5) choiceMenuDeleteToShoppingCart(scanner);
             } else {
                 //내가 고른 카테고리의 메뉴 보이는 화면 0 누르면 뒤로가기
-                insertSuffix = menu.selectMenu(selectNum);
+                menu.setMenuItemList(selectNum);
+                insertSuffix = menu.getMenuItems().size();
+                selectMenu(selectNum);//콘솔에 선택한 카테고리의 메뉴 출력
                 selectNum = insertValueCheck(scanner);
                 if (selectNum != 0) {
                     //선택한 메뉴 보여줌
@@ -100,6 +106,7 @@ public class Kiosk implements KioskFunction {
         }
         scanner.close();
     }
+
 
     @Override
     public void setUserInsertValueSize() {
@@ -118,9 +125,8 @@ public class Kiosk implements KioskFunction {
     /**
      * @param scanner
      * @param choiceMenuItem 선택한 메뉴 정보
-     *
-     * 선택한 메뉴 장바구니에 넣을지 체크
-     *
+     *                       <p>
+     *                       선택한 메뉴 장바구니에 넣을지 체크
      */
     @Override
     public void choiceMenuInsertToShoppingCart(Scanner scanner, MenuItem choiceMenuItem) {
@@ -158,10 +164,7 @@ public class Kiosk implements KioskFunction {
     }
 
     /**
-     *
-     * @param scanner
-     *
-     * 계속 결제를 진행 할 지 체크함 장바구니 내용,총 가격 보여줌
+     * @param scanner 계속 결제를 진행 할 지 체크함 장바구니 내용,총 가격 보여줌
      */
     @Override
     public void continuePaymentCheck(Scanner scanner) {
@@ -181,11 +184,8 @@ public class Kiosk implements KioskFunction {
     }
 
     /**
-     *
      * @param scanner
-     * @param totalPrice
-     *
-     * 결제를 진행하는 메소드 할인 정보를 입력받고 진행함
+     * @param totalPrice 결제를 진행하는 메소드 할인 정보를 입력받고 진행함
      */
     @Override
     public void doPaymentShoppingCart(Scanner scanner, int totalPrice) {
