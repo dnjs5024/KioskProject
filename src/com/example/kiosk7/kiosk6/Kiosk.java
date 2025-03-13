@@ -1,4 +1,4 @@
-package com.example.kiosk6;
+package com.example.kiosk7.kiosk6;
 
 import java.util.*;
 
@@ -9,28 +9,19 @@ public class Kiosk implements KioskFunction {
     private int insertNumRange;
     private Menu menu = null;
     private String key = "Main";
+    private KioskKey kioskKey = null;
 
     private final Map<String, List<String>> nextLocationKeySaveMap = new HashMap<>();
+    private final Map<String, List<String>> getSelectItemUIMap = new HashMap<>();
 
-    private final Map<String, List<String>> selectUserQueryUIMap = new HashMap<>();
 
     //생성자
     public Kiosk(Menu menu) {
         this.menu = menu;
-        insertNumRange = menu.getCategoryName().size();
-        menu.addSelectItemUIMap("ORDER", new ArrayList<>(List.of("\"4. Orders    | 장바구니를 확인 후 주문합니다.\",\"5. Cancel    | 진행중인 주문을 취소합니다.\\n\"")));
-        selectUserQueryUIMap.put("OrderMenu", new ArrayList<>(List.of("아래와 같이 주문 하시겠습니까?\n", "[ Orders ]", "[ Total ]", "1.   주문       2.  메뉴판         ")));
-        selectUserQueryUIMap.put("Shopping", new ArrayList<>(List.of("위 메뉴를 장바구니에 추가하시겠습니까?", "1.   확인       2.  취소         ")));
-        selectUserQueryUIMap.put("Main", new ArrayList<>(List.of("0. 종료    | 종료\n")));
-        for (String key : menu.getSelectItemUIMap().keySet()) {
-            selectUserQueryUIMap.put(key, new ArrayList<>(List.of("0. 뒤로가기    | 뒤로가기")));
-        }
-        //nextLocationKeySaveMap 세팅
-        nextLocationKeySaveMap.put("Main",new ArrayList<>(List.of("Burgers","Drinks","Desserts","ORDER","Cancel")));
-        nextLocationKeySaveMap.put("ORDER",new ArrayList<>(List.of("ORDER","Main")));
 
     }
-    public void locationCheck(String key,Scanner scanner){
+
+    public void locationCheck(String key, Scanner scanner) {
         int selectNum = insertValueCheck(scanner);
         switch (key) {
             case ("Main"):
@@ -45,14 +36,11 @@ public class Kiosk implements KioskFunction {
                 this.insertNumRange = 3;
                 break;
             default:
-                settingMenuUI(key); //Key 가 Burgers, Drinks, Desserts 일 떄
+                //Key 가 Burgers, Drinks, Desserts 일 떄
                 break;
         }
     }
-    //콘솔에 선택한 카테고리의 메뉴 출력
-    public void selectMenu(int selectNum)  {
-        settingMenuUI(key);
-    }
+
 
     public static String changeStringFormat(Integer price) {
         return (price / 1000) + "." + (price / 100 % 10);
@@ -77,31 +65,46 @@ public class Kiosk implements KioskFunction {
 
     }
 
-    public void settingMenuUI(String key) {
-        if (!menu.getSelectItemUIMap().get(key).isEmpty()) {
-            System.out.println("[" + key + " Menu]");
-        }
-        int cnt = 1;
-        for (String item : menu.getSelectItemUIMap().get(key)) {
-            System.out.println(cnt + ". " + item);
-            cnt++;
-        }
-        for (String item : selectUserQueryUIMap.get(key)) {
-            System.out.println(item);
+
+    //kiosk 실행
+    public void start() {
+
+       while(kioskKey==KioskKey.END){
+
+       }
+        Scanner scanner = new Scanner(System.in);
+        //화면출력
+        kioskKey = KioskKey.MAIN;
+        setSelectMenuSize(kioskKey);
+        settingMenuUI(kioskKey);
+        selectMenu(scanner.nextInt());
+
+
+//            //장바구니에 메뉴 들어있으면 보여줌
+//            if (!orderMenuList.isEmpty()) settingMenuUI("ORDER");
+
+    }
+
+    //콘솔에 선택한 카테고리의 메뉴 출력
+    public void selectMenu(int orderNum) {
+        kioskKey = KioskKey.ITEMS;
+        kioskKey.setItemList(menu.getCategoryMenuItemList(orderNum));
+    }
+
+    public void settingMenuUI(KioskKey kioskKey) {
+        System.out.println("[" + kioskKey.getKeyName() + " Menu]");
+        for (int i = 0; i < kioskKey.getItemList().size(); i++) {
+            System.out.println(i + 1 + ". " + kioskKey.getItemList().get(i));
         }
     }
 
-    public void putMap(String key, List<String> list) {
-        this.menu.getSelectItemUIMap().put(key, list);
-    }
-
-    public void setSelectMenuSize(String key) {
-        switch (key) {
-            case ("Main"):
-                this.insertNumRange = 4;
+    public void setSelectMenuSize(KioskKey kioskKey) {
+        switch (kioskKey.getKeyName()) {
+            case ("MAIN"):
+                KioskKey.MAIN.setInsertNumRange(4);
                 break;
-            case ("ORDER"):
-                this.insertNumRange = 6;
+            case ("ITEMS"):
+                this.insertNumRange = KioskKey.ITEMS.getItemList().size();
                 break;
             case ("OrderMenu"):
                 this.insertNumRange = 3;
@@ -110,48 +113,11 @@ public class Kiosk implements KioskFunction {
                 this.insertNumRange = 3;
                 break;
             default:
-                this.insertNumRange = menu.getMenuItems().size();//Key 가 Burgers, Drinks, Desserts 일 떄
                 break;
         }
 
     }
 
-    //kiosk 실행
-    public void start() {
-        //false면 종료
-        boolean flag = true;
-
-        //사용자 입력
-        Scanner scanner = new Scanner(System.in);
-        while (flag) {
-
-            // KEY 로 바라보고 있는 위치체크해서  UI 출력
-            settingMenuUI(key);
-            setSelectMenuSize(key);
-            //장바구니에 메뉴 들어있으면 보여줌
-            if (!orderMenuList.isEmpty()) settingMenuUI("ORDER");
-            int selectNum = insertValueCheck(scanner);
-//            //첫번째 선택화면 0 누르면 종료
-//            if (selectNum == 0) {
-//                flag = false;
-//                System.out.println("프로그램을 종료합니다.");
-//            } else if (3 < selectNum) {
-//                if (selectNum == 4) choiceMenuSelectShoppingCart(scanner);
-//                if (selectNum == 5) choiceMenuDeleteShoppingCart();
-//            } else {
-//                //내가 고른 카테고리의 메뉴 보이는 화면 0 누르면 뒤로가기
-//                insertNumRange = menu.selectMenu(selectNum);
-//                selectNum = insertValueCheck(scanner);
-//                if (selectNum != 0) {
-//                    //선택한 메뉴 보여줌
-//                    System.out.println("선택한 메뉴 : " + menu.getMenuItems().get(selectNum - 1).toString() + "\n");
-//                    insertNumRange = 2;
-//                    choiceMenuInsertShoppingCart(scanner, menu.getMenuItems().get(selectNum - 1));
-//                }
-//            }
-        }
-        scanner.close();
-    }
 
     @Override
     public void viewShoppingCart() {
