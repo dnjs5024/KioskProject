@@ -5,7 +5,8 @@ public class Main {
     private Kiosk kiosk = null;
 
     Main() {
-        kiosk = new Kiosk();
+        Menu menu = new Menu();
+        kiosk = new Kiosk(menu);
     }
 
     public static void main(String[] args) {

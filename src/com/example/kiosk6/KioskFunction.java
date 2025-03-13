@@ -5,8 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public interface KioskFunction {
-    //장바구니 구현
-    List<MenuItem> orderMenuList = new ArrayList<>();
+
     public void viewShoppingCart();
     public void choiceMenuInsertShoppingCart(Scanner scanner,MenuItem choiceMenuItem);
     public void choiceMenuDeleteShoppingCart();
