@@ -24,18 +24,23 @@ Kiosk Project는 무인 주문 시스템을 위한 CLI 기반 애플리케이션
 ```
 KioskProject/
 │── src/
-│   ├── main/
-│   │   ├── kiosk/
-│   │   │   ├── Main.java
-│   │   │   ├── ui/
-│   │   │   ├── model/
-│   │   │   ├── controller/
-│   │   │   └── service/
-│   ├── test/
-│   ├── resources/
-│── README.md
-│── .gitignore
-│── build.gradle
+│   ├── com/
+│   │   ├── example/
+│   │   │   ├── kiosk1/    //LV1
+│   │   │   ├── kiosk2/    //LV2
+│   │   │   ├── kiosk3/    //LV3
+│   │   │   ├── kiosk4/    //LV4
+│   │   │   ├── kiosk5/    //LV5
+│   │   │   ├── kiosk6/ ├── Main.class //도전과제 LV1,2 실행 클래스
+                        ├── Kiosk.java // 키오스크 기능 구현 클래스
+                        ├── Menu.java //MenuItem 관리 클래스
+                        ├── Drink.java //MenuItem 
+                        ├── Burger.java //MenuItem 
+                        ├── Dessert.java //MenuItem 
+                        ├── MenuItem.java //메뉴담아주는 클래스
+                        ├── KioskFunction.java //키오스크 기능 인터페이스
+                        └── Payment.java //결제 enum
+
 ```
 
 
