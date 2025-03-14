@@ -52,7 +52,7 @@ KioskProject/
     - [Kiosk](#kiosk)   
 
 
-- ##Main 
+- ## Main 
 
 ```java
 package com.example.kiosk6;
@@ -72,7 +72,7 @@ public class Main {
     }
 }
 ```
-- ##MenuItem 
+- ## MenuItem 
 
 ```java
 public class MenuItem {
@@ -135,8 +135,8 @@ public class MenuItem {
                 "  | " + description;
     }
 }
-```
-- ##Burger 
+``` 
+- ## Burger 
 ```java
 package com.example.kiosk6;
 
@@ -174,7 +174,7 @@ public class Burger extends MenuItem {
     }
 }
 ```
-- ##Menu
+- ## Menu
 
 ```java
 
@@ -215,7 +215,7 @@ public class Menu {
 }
 
 ```
-- ##Kiosk 
+- ## Kiosk 
 
 ```java
 package com.example.kiosk6;
