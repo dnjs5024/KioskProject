@@ -441,3 +441,19 @@ public class Kiosk implements KioskFunction {
 
 }
 ```
+- 😁 ## 예제 실행 결과
+😁 첫 화면
+![image](https://github.com/user-attachments/assets/937d2628-8dc7-4d3c-b0f2-912797379d48)
+😁 첫 화면 + 장바구니에 물건 있을 경우
+![image](https://github.com/user-attachments/assets/5a98e808-9d05-4e7b-8ee6-2e605cf5b3a5)
+😁 선택 카테고리 메뉴들
+![image](https://github.com/user-attachments/assets/2c8fb04e-e6f1-4a5a-a6db-63ea374bee28)
+😁 장바구니 추가
+![image](https://github.com/user-attachments/assets/c0c9f5dc-54f0-471f-9096-a112f5b42fa1)
+😁 장바구니 조회,삭제
+![image](https://github.com/user-attachments/assets/6180c269-62dc-4249-88ea-cb1af1564f15)
+Image
+😁 주문 
+![image](https://github.com/user-attachments/assets/ded05c97-8968-4d29-9ec0-a614de8a2176)
+
+
