@@ -212,7 +212,7 @@ public class Menu {
     public List<MenuItem> getMenuItems() {
         return new ArrayList<>(menuItemList);//리스트 수정 막기 위해 복사해서 리턴
     }
-
+    //카테고리 아이템 중 선택한 메뉴를 menuItemList에 담아줌
     public void setMenuItemList(int selectNum) {
         this.menuItemList = categoryList.get(selectNum - 1).getSelectCategoryMenuList();
     }
