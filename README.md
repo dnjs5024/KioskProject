@@ -54,6 +54,8 @@ KioskProject/
 
 - ## Main 
 
+👉 프로그램 시작 부분
+
 ```java
 package com.example.kiosk6;
 
@@ -73,6 +75,8 @@ public class Main {
 }
 ```
 - ## MenuItem 
+
+👉 변수 선언, 게터 세터 구현 ,menuItem 담는 리스트 가져오기 위한 메소드 , toString 구현
 
 ```java
 public class MenuItem {
@@ -136,7 +140,10 @@ public class MenuItem {
     }
 }
 ``` 
-- ## Burger 
+- ## Burger
+
+👉 아이템 담는 리스트, menuItemList에 값 저장하고 getter로 접근근
+  
 ```java
 package com.example.kiosk6;
 
@@ -175,6 +182,8 @@ public class Burger extends MenuItem {
 }
 ```
 - ## Menu
+
+👉 menuItem 관리 kiosk에서 데이터 요청하면 보내주는 역할
 
 ```java
 
@@ -215,7 +224,9 @@ public class Menu {
 }
 
 ```
-- ## Kiosk 
+- ## Kiosk
+
+  👉 데이터 직접 접근 x ,menu 에게서 받음 사용자에게 보여줄 화면과 입력값 처리, 장바구니 기능 수행
 
 ```java
 package com.example.kiosk6;
